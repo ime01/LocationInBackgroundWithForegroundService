@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">LocationInBackgroundWithForegroundService</string>
+    <string name="hello">hello People</string>
+    <string name="coloured_text"><font color="#00ff00">Hello</font> <font
+        color="#FF0000">World</font> </string>
+    <string name="enter_otp">enter otp</string>
 </resources>

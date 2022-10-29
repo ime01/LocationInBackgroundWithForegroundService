@@ -43,4 +43,7 @@ dependencies {
 
     // Location Services
     implementation 'com.google.android.gms:play-services-location:20.0.0'
+
+    //Android OTP detection
+    implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
 }
