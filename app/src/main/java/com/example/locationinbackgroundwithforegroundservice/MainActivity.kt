@@ -14,7 +14,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.res.TypedArrayUtils.getText
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.example.locationinbackgroundwithforegroundservice.location.LocationService
+import com.example.locationinbackgroundwithforegroundservice.workmanager.MainWorker
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.gms.common.api.Status
@@ -66,6 +70,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        WorkManager.getInstance(this).beginUniqueWork("update_data", ExistingWorkPolicy.REPLACE,
+            OneTimeWorkRequest.from(MainWorker::class.java)
+        ).enqueue()
+
+
+
+
+
+
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION), 0)
 
         val startTrackingBtn = findViewById<Button>(R.id.button1)
@@ -85,7 +98,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         stopTrackingBtn.setOnClickListener {
-            Intent(applicationContext, LocationService::class.java).apply {
+             Intent(applicationContext, LocationService::class.java).apply {
                 action = LocationService.ACTION_STOP
                 startService(this)
             }
